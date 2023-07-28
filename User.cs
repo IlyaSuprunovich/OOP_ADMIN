@@ -11,7 +11,7 @@ namespace OOP_ADMIN
         public int Id { get; set; }
         public string Nick { get; set; }
         public string Password { get; set; }
-        public string Login { get; set; }
+        public string Login { get; set; }       
 
 
        

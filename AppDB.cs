@@ -22,7 +22,7 @@ namespace OOP_ADMIN
                     Id = 0,
                     Password = "qwerty",
                     Login = "ilja2004",
-                    
+
                 },
 
                 new DefautUser("Mathey")
@@ -40,7 +40,7 @@ namespace OOP_ADMIN
                     Id = 2,
                     Password = "123456",
                     Login = "vlad2005",
-                    
+
                 },
 
                 new DefautUser("Nik")
@@ -49,7 +49,7 @@ namespace OOP_ADMIN
                     Id = 3,
                     Password = "!@#$%^",
                     Login = "nik2005",
-                   
+
                 },
 
                 new Admin("Artom")
@@ -58,68 +58,81 @@ namespace OOP_ADMIN
                     Id = 4,
                     Password = "asdfg",
                     Login = "artom1999",
-                  
+
                 },
             };
 
 
         }
-        public bool IIsLoginAndPasswordExist(string login, string password) => appDBs.Any(x => x.Login == login && x.Password == password);
+        public bool IsLoginAndPasswordExist(string login, string password) => appDBs.Any(x => x.Login == login && x.Password == password);
 
-        public string IFindIdUser(string login, string password)
+        public User FindUser(string login, string password)
         {
 
             if (appDBs.Any(x => x.Login == login && x.Password == password))
             {
 
                 int id = appDBs.FindIndex(x => x.Login == login && x.Password == password);
-                
-                return appDBs[id].Nick;
             }
             else return null;
             
         }
 
-        public bool IFindIdUser(string nick) => appDBs.Any(x => x.Nick == nick);
-
-        public User IFindUser(string login)
-        {
-            if (appDBs.Any(x => x.Login == login))
-            {
-
-                int id = appDBs.FindIndex(x => x.Login == login);
-
-                return appDBs[id];
-            }
-            else return null;
-        }
-
-        public User IFindNickUser(string nick)
+        public int FindIdUser(string nick)
         {
             if (appDBs.Any(x => x.Nick == nick))
             {
-
                 int id = appDBs.FindIndex(x => x.Nick == nick);
-
-                return appDBs[id];
+                return appDBs[id].Id;
             }
+            else return int.MinValue;
+        }
+
+        public bool CheckUserInDB(int id) => appDBs.Any(x => x.Id == id);
+
+        public User FindUser(int id)
+        {
+            if (appDBs.Any(x => x.Id == id))
+                return appDBs.Find(x => x.Id == id);
             else return null;
         }
 
-        public string ICheckBD()
+        public void CheckBD(User user)
         {
             for (int i = 0; i < appDBs.Count; i++)
-            {
-                Console.WriteLine(appDBs[i].Nick);
+                if (user.Id != appDBs[i].Id)
+                    Console.WriteLine(appDBs[i].Nick);
                 
-            }
-
-            return appDBs[0].Nick;
         }
 
-       
+        public void ViewUsersFriends(DefautUser defautUser)
+        {
+            for (int i = 0; i < defautUser.friendsUsers.Count; i++)
+                Console.WriteLine(defautUser.friendsUsers[i].Nick);
+        }
 
-       
+        public void DeletingUser(User user) => appDBs.Remove(user);
 
+        public void CleanupAfterRemoval(int id) // Не бей за это...
+        {
+            for (int i = 0; i < appDBs.Count; i++)// Цикл для перебора всех юзеров
+            {
+                if (appDBs[i] is DefautUser defautUser)
+                {
+                    for (int j = 0; j < defautUser.friendsUsers.Count; j++) // Цикл для перебора всех друзей юзера
+                    {
+                        for (int z = 0; z < appDBs.Count; z++) // Цикл для сравнения друзей и всех возможных юзеров
+                        {
+                            if (defautUser.friendsUsers[j].Id == appDBs[z].Id)
+                            {
+                                defautUser.friendsUsers.RemoveAt(j);
+                                break;
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }

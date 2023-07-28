@@ -8,16 +8,26 @@ namespace OOP_ADMIN
 {
     internal interface IPremitionService
     {
-        bool IIsLoginAndPasswordExist(string login, string password);
-        string IFindIdUser(string login, string password);
-        bool IFindIdUser(string nick);
+        bool IsLoginAndPasswordExist(string login, string password);
 
-        User IFindUser(string login);
+        User FindUser(string login, string password); 
 
-        User IFindNickUser(string nick);
-        string ICheckBD();
+        User FindUser(int id);
 
-        
+        int FindIdUser(string nick);
+
+        bool CheckUserInDB(int id); 
+
+        void CheckBD(User user);
+
+        void ViewUsersFriends(DefautUser defautUser);
+
+        void DeletingUser(User user);
+
+        void CleanupAfterRemoval(int id);
+
+
+
 
     }
 }

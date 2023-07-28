@@ -15,7 +15,7 @@ namespace OOP_ADMIN
           
         }
 
-        public User IAddFriends(User user)
+        public User AddFriends(User user)
         {
             if (user is DefautUser)
             {
@@ -26,7 +26,7 @@ namespace OOP_ADMIN
             return this;
         }
 
-        public User IDeletFriends(User user)
+        public User DeletFriends(User user)
         {
             friendsUsers.Remove(user);
             return this;

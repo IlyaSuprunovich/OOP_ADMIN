@@ -16,20 +16,27 @@ namespace OOP_ADMIN
 
         public User DeleteUsers(AppDB db)
         {
+            Console.WriteLine("Введите ник пользователя которого вы хотите удалить ");
+            string nick = Convert.ToString(Console.ReadLine());
+            int idUsers = db.FindIdUser(nick);
+            db.CleanupAfterRemoval(idUsers);
+            db.DeletingUser(db.FindUser(idUsers));
             return this;
         }
 
-        public User ViewAllUsers(AppDB db)
+        public User ViewAllUsers(AppDB db, User user)
         {
-            db.ICheckBD();
+            db.CheckBD(user);
             return this;
         }
 
         public User ViewUsersFriends(AppDB db)
         {
-            Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть");
+            Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть друзей ");
             string nick = Convert.ToString(Console.ReadLine());
-            
+            int idUsers = db.FindIdUser(nick);
+            Console.WriteLine("Вот его список друзей: ");
+            db.ViewUsersFriends((DefautUser)db.FindUser(idUsers));
             return this;
         }
     }

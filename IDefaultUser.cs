@@ -8,7 +8,7 @@ namespace OOP_ADMIN
 {
     internal interface IDefaultUser
     {
-        User IAddFriends(User user);
-        User IDeletFriends(User user);
+        User AddFriends(User user);
+        User DeletFriends(User user);
     }
 }
