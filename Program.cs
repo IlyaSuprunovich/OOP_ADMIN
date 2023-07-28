@@ -10,9 +10,17 @@ namespace OOP_ADMIN
     {
         static void Main(string[] args)
         {
-            App app = new App();
+            /*App app = new App();
             app.StartApp();
-            Console.ReadLine();
+            Console.ReadLine();*/
+
+            StateMachine stateMachine = new StateMachine();
+            while (true)
+            {
+                stateMachine.Handle();
+            }
+
+            
             
         }
     }

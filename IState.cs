@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface IStateMachine 
+    internal interface IState
     {
-       
+        void OnEnter();
+        void OnTick();
+        void OnExit();
     }
 }

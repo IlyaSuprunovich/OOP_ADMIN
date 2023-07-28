@@ -30,14 +30,14 @@ namespace OOP_ADMIN
             return this;
         }
 
-        public User ViewUsersFriends(AppDB db)
+        public DefautUser ViewUsersFriends(AppDB db)
         {
             Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть друзей ");
             string nick = Convert.ToString(Console.ReadLine());
             int idUsers = db.FindIdUser(nick);
             Console.WriteLine("Вот его список друзей: ");
             db.ViewUsersFriends((DefautUser)db.FindUser(idUsers));
-            return this;
+            return (DefautUser)db.FindUser(idUsers);
         }
     }
 }

@@ -32,18 +32,6 @@ namespace OOP_ADMIN
             return this;
         }
         
-        public User IGetListFriends(AppDB db, string nick)
-        {
-            nick = db.IFindNickUser(nick).Nick;
-
-            for(int i = 0; i < friendsUsers.Count; i++)
-            {
-
-                Console.WriteLine(friendsUsers[i]); 
-                
-            }
-            return this;
-                
-        }
+        
     }
 }

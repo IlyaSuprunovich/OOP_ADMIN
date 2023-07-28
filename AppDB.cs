@@ -73,6 +73,7 @@ namespace OOP_ADMIN
             {
 
                 int id = appDBs.FindIndex(x => x.Login == login && x.Password == password);
+                return appDBs[id];
             }
             else return null;
             

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface IStateMachine 
+    abstract class State
     {
        
     }
