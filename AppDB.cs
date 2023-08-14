@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class AppDB : IPremitionService
+    public class AppDB : IPremitionService
     {
         private readonly List<User> appDBs;
 
@@ -61,8 +61,6 @@ namespace OOP_ADMIN
 
                 },
             };
-
-
         }
         public bool IsLoginAndPasswordExist(string login, string password) => appDBs.Any(x => x.Login == login && x.Password == password);
 

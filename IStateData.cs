@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface Interface2
+    public interface IStateData
     {
     }
 }

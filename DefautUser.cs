@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class DefautUser : User, IDefaultUser
+    public class DefautUser : User, IDefaultUser
     {
         public List<User> friendsUsers = new List<User>();
 
@@ -31,7 +31,5 @@ namespace OOP_ADMIN
             friendsUsers.Remove(user);
             return this;
         }
-        
-        
     }
 }

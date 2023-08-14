@@ -1,23 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class WorkingWithAdmin : IState
+    internal class WorkingWithAdmin : IState, IData<Data>
     {
 
-        private readonly StateMachine _stateMachine;
-        private readonly AppDB _db;
-        private readonly Admin _admin;
+        private StateMachine _stateMachine;
+        private AppDB _db;
+        private Admin _admin;
+        private Data _data;
 
-        public WorkingWithAdmin(StateMachine stateMachine, AppDB db, Admin admin)
+        public WorkingWithAdmin()
         {
-            this._stateMachine = stateMachine;
-            this._db = db;
-            this._admin = admin;
+
         }
 
         public void OnEnter()
@@ -54,13 +49,21 @@ namespace OOP_ADMIN
                 }
                 Console.WriteLine(" ");
             } while (choice != 4);
-            _stateMachine.SetState(new DataInitialization(_stateMachine, _db));
+            _stateMachine.SetState<DataInitialization>();
         }
 
         public void OnExit()
         {
             Console.WriteLine("До свидания админ!");
         }
-    }     
+
+        public void OnEnter(Data data)
+        {
+            this._data = data;
+            this._db = data.Db;
+            this._admin = data.Admin;
+            this._stateMachine = data.StateMachine;
+        }
+    }
 }
 

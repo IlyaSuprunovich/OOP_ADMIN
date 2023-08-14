@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface IState
+    public interface IState
     {
         void OnEnter();
         void OnTick();

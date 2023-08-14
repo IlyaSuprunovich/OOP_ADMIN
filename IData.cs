@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface Interface1
+    public interface IData<TData> where TData : IStateData
     {
+        void OnEnter(TData data);
     }
 }

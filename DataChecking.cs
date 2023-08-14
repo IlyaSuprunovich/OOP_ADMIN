@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace OOP_ADMIN
 {
-    internal class DataChecking : IState
+    internal class DataChecking : IState, IData<Data>
     {
 
-        private readonly StateMachine _stateMachine;
-        private readonly AppDB _db;
+        private StateMachine _stateMachine;
+        private Data _data;
+        private AppDB _db;
         
-
-        public DataChecking(StateMachine stateMachine, AppDB db)
+        public DataChecking()
         {
-            
-            this._stateMachine = stateMachine;
-            this._db = db;
+
         }
 
         public void OnEnter()
@@ -27,22 +26,29 @@ namespace OOP_ADMIN
 
         public void OnTick()
         {
-            if (_db.IsLoginAndPasswordExist(_stateMachine.Login, _stateMachine.Password) == true)
+            OnEnter(_data);
+            if (_db.IsLoginAndPasswordExist(_data.Login, _data.Password) == true)
             {
-                Console.WriteLine("Добро пожаловать " + _db.FindUser(_stateMachine.Login, _stateMachine.Password).Nick);
-                _stateMachine.Id = _db.FindUser(_stateMachine.Login, _stateMachine.Password).Id;
+                Console.WriteLine("Добро пожаловать " + _db.FindUser(_data.Login, _data.Password).Nick);
+                _data.Id = _db.FindUser(_data.Login, _data.Password).Id;
 
-                if (_db.FindUser(_stateMachine.Id) is DefautUser defautUser)
-                    _stateMachine.SetState(new WorkingWhithDefaultUser(_stateMachine, _db, defautUser));
-                
-                else if (_db.FindUser(_stateMachine.Id) is Admin admin)
-                    _stateMachine.SetState(new WorkingWithAdmin(_stateMachine, _db, admin));
-                
+                if (_db.FindUser(_data.Id) is DefautUser defautUser)
+                {
+                    _data.DefautUser = defautUser;
+                    _stateMachine.SetState<WorkingWhithDefaultUser, Data>(_data);
+                }
+
+                else if (_db.FindUser(_data.Id) is Admin admin)
+                {
+                    _data.Admin = admin;
+                    _stateMachine.SetState<WorkingWithAdmin, Data>(_data);
+                }
+
             }
             else
             {
                 Console.WriteLine("Неверный логин или пароль");
-                _stateMachine.SetState(new DataInitialization(_stateMachine, _db));
+                _stateMachine.SetState<DataInitialization, Data>(_data);
             }
         }
 
@@ -51,8 +57,13 @@ namespace OOP_ADMIN
             Console.WriteLine("Переходим к работе с интерфейсом");
         }
 
-        
-
-        
+        public void OnEnter(Data data)
+        {
+            _data = data; 
+            _db = data.Db;
+            _data.Login = data.Login;
+            _data.Password = data.Password;
+            _stateMachine = data.StateMachine;
+        }
     }
 }

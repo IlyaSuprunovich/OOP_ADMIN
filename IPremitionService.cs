@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal interface IPremitionService
+    public interface IPremitionService
     {
         bool IsLoginAndPasswordExist(string login, string password);
 

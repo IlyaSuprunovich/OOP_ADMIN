@@ -6,40 +6,60 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-   internal class StateMachine
+   public class StateMachine
     {
-        AppDB db;
-        private List<IState> _states = new List<IState>();
+        private Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;
-        public string Login { get; set; }
-        public string Password { get; set; }
-        public int Id { get; set; }
 
-        
-
-        public StateMachine(/*State stateA, State stateB, State stateC, State stateD*/)
+        public StateMachine()
         {
-            db = new AppDB();
-            /*_states.Add(stateA);
-            _states.Add(stateB);
-            _states.Add(stateC);
-            _states.Add(stateD);*/
-            _currentState = new DataInitialization(this, db);
+            DataInitialization dataInitialization = new DataInitialization();
+            DataChecking dataChecking = new DataChecking();
+            WorkingWhithDefaultUser workingWhithDefaultUser = new WorkingWhithDefaultUser();
+            WorkingWithAdmin workingWithAdmin = new WorkingWithAdmin();
+            _states.Add(dataInitialization.GetType(), dataInitialization);
+            _states.Add(dataChecking.GetType(), dataChecking);
+            _states.Add(workingWhithDefaultUser.GetType(), workingWhithDefaultUser);
+            _states.Add(workingWithAdmin.GetType(), workingWithAdmin);
         }
 
 
-        public void SetState(IState state)
+        public void SetState<TState>() where TState : class, IState
         {
             if(_currentState != null)
                 _currentState.OnExit();
-            _currentState = state;
+
+            _currentState = _states[typeof(TState)];
+            _currentState.OnEnter();
             
+        }
+
+        public void SetState<TState, TData>(TData data)
+            where TState : class, IState
+            where TData : IStateData
+        {
+            if (_currentState != null)
+                _currentState.OnExit();
+
+            _currentState = _states[typeof(TState)];
+
+
+            if (_currentState is IData<TData> paramsState)
+            {
+                paramsState?.OnEnter(data);
+            }
+            else
+            {
+                throw new Exception("Not available type");
+            }
+
+            _currentState.OnEnter();
+
         }
 
         public void Handle()
         {
-            _currentState.OnEnter();
-            _currentState.OnTick();
+            _currentState?.OnTick();
         }
     }
 

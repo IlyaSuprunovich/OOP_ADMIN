@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    class Admin : User, IAdmin
+    public class Admin : User, IAdmin
     {
         public Admin(string nick)
         {

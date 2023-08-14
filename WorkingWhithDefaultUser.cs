@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class WorkingWhithDefaultUser : IState
+    internal class WorkingWhithDefaultUser : IState, IData<Data>
     {
-        private readonly StateMachine _stateMachine;
-        private readonly AppDB _db;
-        private readonly DefautUser _defautUser;
+        private StateMachine _stateMachine;
+        private AppDB _db;
+        private DefautUser _defautUser;
+        private Data _data;
 
-        public  WorkingWhithDefaultUser(StateMachine stateMachine, AppDB db, DefautUser defautUser)
+        public  WorkingWhithDefaultUser()
         {
-            this._stateMachine = stateMachine;
-            this._db = db;
-            this._defautUser = defautUser;
+            
         }
 
         public void OnEnter()
@@ -41,7 +40,7 @@ namespace OOP_ADMIN
                         Console.WriteLine("Введите ник друга");
                         string nick = Convert.ToString(Console.ReadLine());
                         int idFriends = _db.FindIdUser(nick);
-                        if (_db.CheckUserInDB(idFriends) == true && _db.FindUser(_stateMachine.Id) != _db.FindUser(idFriends))
+                        if (_db.CheckUserInDB(idFriends) == true && _db.FindUser(_data.Id) != _db.FindUser(idFriends))
                         {
                             _defautUser.AddFriends(_db.FindUser(idFriends));
                         }
@@ -67,7 +66,7 @@ namespace OOP_ADMIN
                 }
                 Console.WriteLine(" ");
             } while (choice != 4);
-            _stateMachine.SetState(new DataInitialization(_stateMachine, _db));
+           _stateMachine.SetState<DataInitialization, Data>(_data);
         }
 
         public void OnExit()
@@ -75,6 +74,12 @@ namespace OOP_ADMIN
              Console.WriteLine("Работа с пользователем");
         }
 
-        
+        public void OnEnter(Data data)
+        {
+            this._data = data;
+            this._db = data.Db;
+            this._defautUser = data.DefautUser;
+            this._stateMachine = data.StateMachine;
+        }
     }
 }

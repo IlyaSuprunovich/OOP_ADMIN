@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,16 +7,17 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class DataInitialization : State, IState
+    internal class DataInitialization : IState, IData<Data>
     {
 
-        private readonly StateMachine _stateMachine;
         private readonly AppDB _db;
+        private StateMachine _stateMachine;
+        private  Data _data;
 
-        public DataInitialization(StateMachine stateMachine, AppDB db)
+        public DataInitialization()
         {
-            this._stateMachine = stateMachine;
-            this._db = db;
+            _db = new AppDB();
+            _data = new Data();
         }
 
         public void OnEnter()
@@ -27,10 +29,11 @@ namespace OOP_ADMIN
         {
             string login = Convert.ToString(Console.ReadLine());
             string password = Convert.ToString(Console.ReadLine());
-            _stateMachine.Login = login;
-            _stateMachine.Password = password;
-
-            _stateMachine.SetState(new DataChecking(_stateMachine, _db));
+            _data.Login = login;
+            _data.Password = password; 
+            _data.Db = _db;
+            _data.StateMachine = _stateMachine;
+            _stateMachine.SetState<DataChecking, Data>(_data);
         }
 
         public void OnExit()
@@ -38,8 +41,9 @@ namespace OOP_ADMIN
             Console.WriteLine("Данные получены");
         }
 
-       
-
-        
+        public void OnEnter(Data data)
+        {
+            this._stateMachine = data.StateMachine;
+        }
     }
 }
