@@ -2,17 +2,18 @@
 
 namespace OOP_ADMIN
 {
-    internal class WorkingWithAdmin : IState, IData<Data>
+    internal class WorkingWithAdmin : IState, IData<DataForStateWorkingWhithAdmin>
     {
 
-        private StateMachine _stateMachine;
-        private AppDB _db;
+        private readonly StateMachine _stateMachine;
+        private readonly WorkingWhithDB _db;
         private Admin _admin;
-        private Data _data;
+        
 
-        public WorkingWithAdmin()
+        public WorkingWithAdmin(StateMachine stateMachine, WorkingWhithDB db)
         {
-
+            this._stateMachine = stateMachine;
+            this._db = db;
         }
 
         public void OnEnter()
@@ -57,12 +58,9 @@ namespace OOP_ADMIN
             Console.WriteLine("До свидания админ!");
         }
 
-        public void OnEnter(Data data)
+        public void OnEnter(DataForStateWorkingWhithAdmin data)
         {
-            this._data = data;
-            this._db = data.Db;
-            this._admin = data.Admin;
-            this._stateMachine = data.StateMachine;
+            this._admin = data.Admin;    
         }
     }
 }

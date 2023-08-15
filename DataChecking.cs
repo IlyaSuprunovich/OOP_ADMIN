@@ -7,16 +7,19 @@ using System.Xml.Linq;
 
 namespace OOP_ADMIN
 {
-    internal class DataChecking : IState, IData<Data>
+    internal class DataChecking : IState, IData<DataForStateDataChecking>
     {
 
         private StateMachine _stateMachine;
-        private Data _data;
-        private AppDB _db;
+        private DataForStateDataChecking _data;
+        private DataForStateWorkingWhithDefaultUser _dataDefaultUser;
+        private DataForStateWorkingWhithAdmin _dataAdmin;
+        private WorkingWhithDB _db;
         
-        public DataChecking()
+        public DataChecking(StateMachine stateMachine, WorkingWhithDB db)
         {
-
+            this._stateMachine = stateMachine;
+            this._db = db;
         }
 
         public void OnEnter()
@@ -26,7 +29,6 @@ namespace OOP_ADMIN
 
         public void OnTick()
         {
-            OnEnter(_data);
             if (_db.IsLoginAndPasswordExist(_data.Login, _data.Password) == true)
             {
                 Console.WriteLine("Добро пожаловать " + _db.FindUser(_data.Login, _data.Password).Nick);
@@ -34,21 +36,22 @@ namespace OOP_ADMIN
 
                 if (_db.FindUser(_data.Id) is DefautUser defautUser)
                 {
-                    _data.DefautUser = defautUser;
-                    _stateMachine.SetState<WorkingWhithDefaultUser, Data>(_data);
+                    _dataDefaultUser.DefautUser = defautUser;
+                   
+                    _stateMachine.SetState<WorkingWhithDefaultUser, DataForStateWorkingWhithDefaultUser>(_dataDefaultUser);
                 }
 
                 else if (_db.FindUser(_data.Id) is Admin admin)
                 {
-                    _data.Admin = admin;
-                    _stateMachine.SetState<WorkingWithAdmin, Data>(_data);
+                    _dataAdmin.Admin = admin;
+                    _stateMachine.SetState<WorkingWithAdmin, DataForStateWorkingWhithAdmin>(_dataAdmin);
                 }
 
             }
             else
             {
                 Console.WriteLine("Неверный логин или пароль");
-                _stateMachine.SetState<DataInitialization, Data>(_data);
+                _stateMachine.SetState<DataInitialization>();
             }
         }
 
@@ -57,13 +60,10 @@ namespace OOP_ADMIN
             Console.WriteLine("Переходим к работе с интерфейсом");
         }
 
-        public void OnEnter(Data data)
+        public void OnEnter(DataForStateDataChecking data)
         {
-            _data = data; 
-            _db = data.Db;
             _data.Login = data.Login;
             _data.Password = data.Password;
-            _stateMachine = data.StateMachine;
         }
     }
 }

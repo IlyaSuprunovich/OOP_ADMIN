@@ -8,15 +8,17 @@ namespace OOP_ADMIN
 {
    public class StateMachine
     {
-        private Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
+        private readonly Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;
 
         public StateMachine()
         {
-            DataInitialization dataInitialization = new DataInitialization();
-            DataChecking dataChecking = new DataChecking();
-            WorkingWhithDefaultUser workingWhithDefaultUser = new WorkingWhithDefaultUser();
-            WorkingWithAdmin workingWithAdmin = new WorkingWithAdmin();
+            AppDB appDB = new AppDB(); 
+            WorkingWhithDB db = new WorkingWhithDB(appDB);
+            DataInitialization dataInitialization = new DataInitialization(this);
+            DataChecking dataChecking = new DataChecking(this, db);
+            WorkingWhithDefaultUser workingWhithDefaultUser = new WorkingWhithDefaultUser(this, db);
+            WorkingWithAdmin workingWithAdmin = new WorkingWithAdmin(this, db);
             _states.Add(dataInitialization.GetType(), dataInitialization);
             _states.Add(dataChecking.GetType(), dataChecking);
             _states.Add(workingWhithDefaultUser.GetType(), workingWhithDefaultUser);
@@ -50,7 +52,8 @@ namespace OOP_ADMIN
             }
             else
             {
-                throw new Exception("Not available type");
+                
+                /*throw new Exception("Not available type");*/
             }
 
             _currentState.OnEnter();

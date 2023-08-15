@@ -12,12 +12,8 @@ namespace OOP_ADMIN
         public void StartApp()
         {
             StateMachine stateMachine = new StateMachine();
-            Data data = new Data
-            {
-                StateMachine = stateMachine
-            };
 
-            stateMachine.SetState<DataInitialization, Data>(data);
+            stateMachine.SetState<DataInitialization>();
 
             while (true)   
                 stateMachine.Handle();

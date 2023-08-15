@@ -8,8 +8,8 @@ namespace OOP_ADMIN
 {
     internal interface IAdmin
     {
-        User ViewAllUsers(AppDB db, User user);
-        DefautUser ViewUsersFriends(AppDB db);
-        User DeleteUsers(AppDB db);
+        User ViewAllUsers(WorkingWhithDB db, User user);
+        DefautUser ViewUsersFriends(WorkingWhithDB db);
+        User DeleteUsers(WorkingWhithDB db);
     }
 }

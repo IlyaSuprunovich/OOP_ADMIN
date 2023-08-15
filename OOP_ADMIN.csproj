@@ -46,8 +46,11 @@
     <Compile Include="Admin.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AppDB.cs" />
-    <Compile Include="Data.cs" />
     <Compile Include="DataChecking.cs" />
+    <Compile Include="DataForStateDataInitialization.cs" />
+    <Compile Include="DataForStateDataChecking.cs" />
+    <Compile Include="DataForStateWorkingWhithDefaultUser.cs" />
+    <Compile Include="DataForStateWorkingWhithAdmin.cs" />
     <Compile Include="DataInitialization.cs" />
     <Compile Include="DefautUser.cs" />
     <Compile Include="IAdmin.cs" />
@@ -60,10 +63,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="User.cs" />
+    <Compile Include="WorkingWhithDB.cs" />
     <Compile Include="WorkingWhithDefaultUser.cs" />
     <Compile Include="WorkingWithAdmin.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".editorconfig" />
     <None Include="App.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -14,7 +14,7 @@ namespace OOP_ADMIN
            
         }
 
-        public User DeleteUsers(AppDB db)
+        public User DeleteUsers(WorkingWhithDB db)
         {
             Console.WriteLine("Введите ник пользователя которого вы хотите удалить ");
             string nick = Convert.ToString(Console.ReadLine());
@@ -24,13 +24,13 @@ namespace OOP_ADMIN
             return this;
         }
 
-        public User ViewAllUsers(AppDB db, User user)
+        public User ViewAllUsers(WorkingWhithDB db, User user)
         {
             db.CheckBD(user);
             return this;
         }
 
-        public DefautUser ViewUsersFriends(AppDB db)
+        public DefautUser ViewUsersFriends(WorkingWhithDB db)
         {
             Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть друзей ");
             string nick = Convert.ToString(Console.ReadLine());

@@ -6,16 +6,17 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    internal class WorkingWhithDefaultUser : IState, IData<Data>
+    internal class WorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
     {
-        private StateMachine _stateMachine;
-        private AppDB _db;
+        private readonly StateMachine _stateMachine;
+        private readonly WorkingWhithDB _db;
         private DefautUser _defautUser;
-        private Data _data;
+        private DataForStateWorkingWhithDefaultUser _data;
 
-        public  WorkingWhithDefaultUser()
+        public  WorkingWhithDefaultUser(StateMachine stateMachine, WorkingWhithDB db)
         {
-            
+            this._stateMachine = stateMachine;
+            this._db = db;
         }
 
         public void OnEnter()
@@ -66,7 +67,7 @@ namespace OOP_ADMIN
                 }
                 Console.WriteLine(" ");
             } while (choice != 4);
-           _stateMachine.SetState<DataInitialization, Data>(_data);
+           _stateMachine.SetState<DataInitialization>( );
         }
 
         public void OnExit()
@@ -74,12 +75,9 @@ namespace OOP_ADMIN
              Console.WriteLine("Работа с пользователем");
         }
 
-        public void OnEnter(Data data)
+        public void OnEnter(DataForStateWorkingWhithDefaultUser data)
         {
-            this._data = data;
-            this._db = data.Db;
             this._defautUser = data.DefautUser;
-            this._stateMachine = data.StateMachine;
         }
     }
 }
