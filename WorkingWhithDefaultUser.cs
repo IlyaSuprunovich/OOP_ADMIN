@@ -9,11 +9,11 @@ namespace OOP_ADMIN
     internal class WorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
     {
         private readonly StateMachine _stateMachine;
-        private readonly WorkingWhithDB _db;
+        private readonly WorkWhithDB _db;
         private DefautUser _defautUser;
         private DataForStateWorkingWhithDefaultUser _data;
 
-        public  WorkingWhithDefaultUser(StateMachine stateMachine, WorkingWhithDB db)
+        public  WorkingWhithDefaultUser(StateMachine stateMachine, WorkWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;

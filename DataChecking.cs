@@ -14,9 +14,9 @@ namespace OOP_ADMIN
         private DataForStateDataChecking _data;
         private DataForStateWorkingWhithDefaultUser _dataDefaultUser;
         private DataForStateWorkingWhithAdmin _dataAdmin;
-        private WorkingWhithDB _db;
+        private WorkWhithDB _db;
         
-        public DataChecking(StateMachine stateMachine, WorkingWhithDB db)
+        public DataChecking(StateMachine stateMachine, WorkWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;

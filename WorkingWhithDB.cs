@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-    public class WorkingWhithDB : AppDB, IPremitionService 
+    public class WorkWhithDB : AppDB, IPremitionService 
     {
         private readonly AppDB _db;
 
-        public WorkingWhithDB(AppDB db)
+        public WorkWhithDB(AppDB db)
         {
             this._db = db;
         }

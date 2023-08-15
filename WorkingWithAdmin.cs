@@ -6,11 +6,11 @@ namespace OOP_ADMIN
     {
 
         private readonly StateMachine _stateMachine;
-        private readonly WorkingWhithDB _db;
+        private readonly WorkWhithDB _db;
         private Admin _admin;
         
 
-        public WorkingWithAdmin(StateMachine stateMachine, WorkingWhithDB db)
+        public WorkingWithAdmin(StateMachine stateMachine, WorkWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;
