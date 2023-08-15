@@ -11,7 +11,10 @@ namespace OOP_ADMIN
         }
         public void StartApp()
         {
-            StateMachine stateMachine = new StateMachine();
+
+            AppDB appDB = new AppDB();
+            WorkingWhithDB db = new WorkingWhithDB(appDB);
+            StateMachine stateMachine = new StateMachine(db);
 
             stateMachine.SetState<DataInitialization>();
 

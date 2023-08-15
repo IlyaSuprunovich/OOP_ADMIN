@@ -11,10 +11,9 @@ namespace OOP_ADMIN
         private readonly Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;
 
-        public StateMachine()
+        public StateMachine(WorkingWhithDB db )
         {
-            AppDB appDB = new AppDB(); 
-            WorkingWhithDB db = new WorkingWhithDB(appDB);
+            
             DataInitialization dataInitialization = new DataInitialization(this);
             DataChecking dataChecking = new DataChecking(this, db);
             WorkingWhithDefaultUser workingWhithDefaultUser = new WorkingWhithDefaultUser(this, db);
