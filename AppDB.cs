@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// database simulation.
+    /// </summary>
     public class AppDB
     {
         protected readonly List<User> appDBs;

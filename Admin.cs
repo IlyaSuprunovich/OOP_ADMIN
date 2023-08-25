@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Contains functionality for viewing all users, viewing all user friends, deleting a user.
+    /// </summary>
     public class Admin : User, IAdmin
     {
         public Admin(string nick)

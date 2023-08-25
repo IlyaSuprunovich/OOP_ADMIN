@@ -2,6 +2,9 @@
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Statuses for working with the admin.
+    /// </summary>
     internal class WorkingWithAdmin : IState, IData<DataForStateWorkingWhithAdmin>
     {
 

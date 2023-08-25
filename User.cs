@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// An abstract class containing all user data.
+    /// </summary>
     public abstract class User
     {
         public int Id { get; set; }

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Starts the state machine.
+    /// </summary>
     internal class App
     { 
         public App()

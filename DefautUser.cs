@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Contains functionality for adding a friend, deleting a friend.
+    /// </summary>
     public class DefautUser : User, IDefaultUser
     {
         public List<User> friendsUsers = new List<User>();

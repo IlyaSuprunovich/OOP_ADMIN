@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Data entry from the user.
+    /// </summary>
     internal class DataInitialization : IState, IData<DataForStateDataInitialization>
     {
 

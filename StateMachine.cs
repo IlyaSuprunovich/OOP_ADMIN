@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
-   public class StateMachine
+    /// <summary>
+    /// Architecture for working with states.
+    /// </summary>
+    public class StateMachine
     {
         private readonly Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;

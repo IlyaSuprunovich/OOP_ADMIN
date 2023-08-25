@@ -7,6 +7,9 @@ using System.Xml.Linq;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Checks the entered data and determines the type of user.
+    /// </summary>
     internal class DataChecking : IState, IData<DataForStateDataChecking>
     {
 

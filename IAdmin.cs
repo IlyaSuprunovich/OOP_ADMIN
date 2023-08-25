@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Interface for working whith Admin.
+    /// </summary>
     internal interface IAdmin
     {
         User ViewAllUsers(WorkWhithDB db, Admin admin);

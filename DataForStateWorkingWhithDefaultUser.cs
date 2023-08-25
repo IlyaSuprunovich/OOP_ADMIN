@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// Data for state WorkingWhithDefaultUser.
+    /// </summary>
     public struct DataForStateWorkingWhithDefaultUser : IStateData
     {
         public int Id;

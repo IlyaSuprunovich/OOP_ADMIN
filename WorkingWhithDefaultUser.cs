@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace OOP_ADMIN
 {
+    /// <summary>
+    /// States for working with a default user.
+    /// </summary>
     internal class WorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
     {
         private readonly StateMachine _stateMachine;
@@ -51,10 +54,7 @@ namespace OOP_ADMIN
                         nick = Convert.ToString(Console.ReadLine());
                         idFriends = _db.FindIdUser(nick);
                         if (_db.CheckFrendsInList(_defautUser, _db.FindUser(idFriends)))
-                        {
                             _defautUser.DeletFriends(_db.FindUser(idFriends));
-                            Console.WriteLine($"Пользователь с ником {_db.FindUser(idFriends).Nick} удален из друзей!");
-                        }
                         break;
                     case 3:
                         if (_defautUser.friendsUsers.Count > 0)
