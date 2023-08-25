@@ -20,6 +20,8 @@ namespace OOP_ADMIN
 
         void CheckBD(Admin admin);
 
+        bool CheckFrendsInList(DefautUser defautUser, User user);
+
         void ViewUsersFriends(DefautUser defautUser);
 
         void DeletingUser(User user);

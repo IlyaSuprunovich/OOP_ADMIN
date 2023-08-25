@@ -57,7 +57,7 @@ namespace OOP_ADMIN
 
         public void OnExit()
         {
-            Console.WriteLine("Переходим к работе с интерфейсом");
+            Console.WriteLine("Идем дальше!");
         }
 
         public void OnEnter(DataForStateDataChecking data)

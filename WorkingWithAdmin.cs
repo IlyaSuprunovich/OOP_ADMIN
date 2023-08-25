@@ -41,8 +41,12 @@ namespace OOP_ADMIN
                         Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть друзей ");
                         string nick = Convert.ToString(Console.ReadLine());
                         int idUsers = _db.FindIdUser(nick);
-                        Console.WriteLine("Вот его список друзей: ");
-                        _db.ViewUsersFriends((DefautUser)_db.FindUser(idUsers));
+                        if (_db.FindUser(idUsers) != _admin)
+                        {
+                            Console.WriteLine("Вот его список друзей: ");
+                            _db.ViewUsersFriends((DefautUser)_db.FindUser(idUsers));
+                        }
+                        else Console.WriteLine("У админа нельзя смотреть друзей!");
                         break;
                     case 3:
                         _admin.DeleteUsers(_db);

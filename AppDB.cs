@@ -39,7 +39,7 @@ namespace OOP_ADMIN
                     Nick = "Vlad",
                     Id = 2,
                     Password = "123456",
-                    Login = "vlad2005",
+                    Login = "vlad2002",
 
                 },
 

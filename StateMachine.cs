@@ -27,8 +27,7 @@ namespace OOP_ADMIN
 
         public void SetState<TState>() where TState : class, IState
         {
-            if(_currentState != null)
-                _currentState.OnExit();
+             _currentState?.OnExit();
 
             _currentState = _states[typeof(TState)];
             _currentState.OnEnter();

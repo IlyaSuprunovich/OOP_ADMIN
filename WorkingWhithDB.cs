@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -43,6 +44,9 @@ namespace OOP_ADMIN
 
         public bool CheckUserInDB(int id) => appDBs.Any(x => x.Id == id);
 
+        public bool CheckFrendsInList(DefautUser defautUser, User user) => defautUser.friendsUsers.Any(x => x.Nick == user.Nick);
+        
+
         public User FindUser(int id)
         {
             if (appDBs.Any(x => x.Id == id))
@@ -53,15 +57,14 @@ namespace OOP_ADMIN
         public void CheckBD(Admin admin)
         {
             for (int i = 0; i < appDBs.Count; i++)
-                if (admin.Id != appDBs[i].Id)
+            {
+                using (StreamWriter streamWriter = new StreamWriter("AllUsers.txt", false, Encoding.UTF8))
                 {
-                    using (StreamWriter streamWriter = new StreamWriter("AllUsers.txt", false, Encoding.UTF8))
-                    {
-                        streamWriter.Write(appDBs[i].Nick);
-                    }
-                        Console.WriteLine(appDBs[i].Nick);
+                    streamWriter.Write(appDBs[i].Nick);
                 }
+                Console.WriteLine(appDBs[i].Nick);
 
+            }
         }
 
         public void ViewUsersFriends(DefautUser defautUser)
@@ -72,24 +75,14 @@ namespace OOP_ADMIN
 
         public void DeletingUser(User user) => appDBs.Remove(user);
 
-        public void CleanupAfterRemoval(int id) // Не бей за это...
-        {
-            for (int i = 0; i < appDBs.Count; i++)// Цикл для перебора всех юзеров
+        public void CleanupAfterRemoval(int id) 
+        { 
+            for (int i = 0; i < appDBs.Count; i++)
             {
                 if (appDBs[i] is DefautUser defautUser)
                 {
-                    for (int j = 0; j < defautUser.friendsUsers.Count; j++) // Цикл для перебора всех друзей юзера
-                    {
-                        for (int z = 0; z < appDBs.Count; z++) // Цикл для сравнения друзей и всех возможных юзеров
-                        {
-                            if (defautUser.friendsUsers[j].Id == appDBs[z].Id)
-                            {
-                                defautUser.friendsUsers.RemoveAt(j);
-                                break;
-                            }
-
-                        }
-                    }
+                    if(CheckFrendsInList(defautUser, FindUser(id)))
+                        defautUser.friendsUsers.Remove(FindUser(id));
                 }
             }
         }

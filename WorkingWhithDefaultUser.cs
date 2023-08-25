@@ -42,34 +42,19 @@ namespace OOP_ADMIN
                         Console.WriteLine("Введите ник друга");
                         string nick = Convert.ToString(Console.ReadLine());
                         int idFriends = _db.FindIdUser(nick);
-                        if (_db.CheckUserInDB(idFriends) == true && _db.FindUser(_data.Id) != _db.FindUser(idFriends))
-                        {
-                            _defautUser.AddFriends(_db.FindUser(idFriends));
-                           
-                            using (StreamWriter streamWriter = new StreamWriter("FriendList", true, UTF8Encoding.UTF8))
-                            {
-                                string nameFriends = _db.FindUser(idFriends).Nick;
-                                streamWriter.WriteLine(nameFriends);
-                            }
-                        }
-                        else Console.WriteLine("Такого пользователя не существует!");
+                        if (_db.CheckUserInDB(idFriends) == true && _db.FindUser(idFriends) != this._defautUser && !_db.CheckFrendsInList(_defautUser, _db.FindUser(idFriends)))
+                                _defautUser.AddFriends(_db.FindUser(idFriends));   
+                        else Console.WriteLine("Невозможно добавить в друзья!");
                         break;
                     case 2:
                         Console.WriteLine("Введите ник друга");
                         nick = Convert.ToString(Console.ReadLine());
                         idFriends = _db.FindIdUser(nick);
-                        if (_db.CheckUserInDB(idFriends) == true)
+                        if (_db.CheckFrendsInList(_defautUser, _db.FindUser(idFriends)))
                         {
                             _defautUser.DeletFriends(_db.FindUser(idFriends));
                             Console.WriteLine($"Пользователь с ником {_db.FindUser(idFriends).Nick} удален из друзей!");
-                            using (StreamWriter streamWriter = new StreamWriter("FriendList", false, UTF8Encoding.UTF8))
-                                for(int i = 0; i < _defautUser.friendsUsers.Count; i++)
-                                    streamWriter.WriteLine(_defautUser.friendsUsers[i].Nick);
-                                
-                                
-                            
                         }
-                        else Console.WriteLine("Такого пользователя не существует!");
                         break;
                     case 3:
                         if (_defautUser.friendsUsers.Count > 0)
@@ -85,7 +70,7 @@ namespace OOP_ADMIN
 
         public void OnExit()
         {
-             Console.WriteLine("Работа с пользователем");
+             Console.WriteLine("До встречи!");
         }
 
         public void OnEnter(DataForStateWorkingWhithDefaultUser data)

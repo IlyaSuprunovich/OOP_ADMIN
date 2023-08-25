@@ -19,8 +19,12 @@ namespace OOP_ADMIN
             Console.WriteLine("Введите ник пользователя которого вы хотите удалить ");
             string nick = Convert.ToString(Console.ReadLine());
             int idUsers = db.FindIdUser(nick);
-            db.CleanupAfterRemoval(idUsers);
-            db.DeletingUser(db.FindUser(idUsers));
+            if (db.FindUser(idUsers) != this)
+            {
+                db.CleanupAfterRemoval(idUsers);
+                db.DeletingUser(db.FindUser(idUsers));
+            }
+            else Console.WriteLine("Админа нельзя удалить!");
             return this;
         }
 
