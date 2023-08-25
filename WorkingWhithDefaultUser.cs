@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,7 +10,7 @@ namespace OOP_ADMIN
     internal class WorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
     {
         private readonly StateMachine _stateMachine;
-        private readonly WorkWhithDB _db;
+        private WorkWhithDB _db;
         private DefautUser _defautUser;
         private DataForStateWorkingWhithDefaultUser _data;
 
@@ -44,6 +45,12 @@ namespace OOP_ADMIN
                         if (_db.CheckUserInDB(idFriends) == true && _db.FindUser(_data.Id) != _db.FindUser(idFriends))
                         {
                             _defautUser.AddFriends(_db.FindUser(idFriends));
+                           
+                            using (StreamWriter streamWriter = new StreamWriter("FriendList", true, UTF8Encoding.UTF8))
+                            {
+                                string nameFriends = _db.FindUser(idFriends).Nick;
+                                streamWriter.WriteLine(nameFriends);
+                            }
                         }
                         else Console.WriteLine("Такого пользователя не существует!");
                         break;
@@ -55,6 +62,12 @@ namespace OOP_ADMIN
                         {
                             _defautUser.DeletFriends(_db.FindUser(idFriends));
                             Console.WriteLine($"Пользователь с ником {_db.FindUser(idFriends).Nick} удален из друзей!");
+                            using (StreamWriter streamWriter = new StreamWriter("FriendList", false, UTF8Encoding.UTF8))
+                                for(int i = 0; i < _defautUser.friendsUsers.Count; i++)
+                                    streamWriter.WriteLine(_defautUser.friendsUsers[i].Nick);
+                                
+                                
+                            
                         }
                         else Console.WriteLine("Такого пользователя не существует!");
                         break;

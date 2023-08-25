@@ -6,7 +6,7 @@ namespace OOP_ADMIN
     {
 
         private readonly StateMachine _stateMachine;
-        private readonly WorkWhithDB _db;
+        private  WorkWhithDB _db;
         private Admin _admin;
         
 
@@ -35,7 +35,7 @@ namespace OOP_ADMIN
                 switch (choice)
                 {
                     case 1:
-                        _admin.ViewAllUsers(_db, (User)_admin);
+                        _admin.ViewAllUsers(_db, _admin);
                         break;
                     case 2:
                         Console.WriteLine("Введите ник пользователя у которого вы хотите посмотреть друзей ");

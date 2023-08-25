@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -49,11 +50,17 @@ namespace OOP_ADMIN
             else return null;
         }
 
-        public void CheckBD(User user)
+        public void CheckBD(Admin admin)
         {
             for (int i = 0; i < appDBs.Count; i++)
-                if (user.Id != appDBs[i].Id)
-                    Console.WriteLine(appDBs[i].Nick);
+                if (admin.Id != appDBs[i].Id)
+                {
+                    using (StreamWriter streamWriter = new StreamWriter("AllUsers.txt", false, Encoding.UTF8))
+                    {
+                        streamWriter.Write(appDBs[i].Nick);
+                    }
+                        Console.WriteLine(appDBs[i].Nick);
+                }
 
         }
 

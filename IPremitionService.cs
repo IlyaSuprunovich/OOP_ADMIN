@@ -18,7 +18,7 @@ namespace OOP_ADMIN
 
         bool CheckUserInDB(int id); 
 
-        void CheckBD(User user);
+        void CheckBD(Admin admin);
 
         void ViewUsersFriends(DefautUser defautUser);
 

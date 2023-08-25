@@ -24,9 +24,9 @@ namespace OOP_ADMIN
             return this;
         }
 
-        public User ViewAllUsers(WorkWhithDB db, User user)
+        public User ViewAllUsers(WorkWhithDB db, Admin admin)
         {
-            db.CheckBD(user);
+            db.CheckBD(admin);
             return this;
         }
 

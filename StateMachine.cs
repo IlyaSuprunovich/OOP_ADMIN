@@ -11,7 +11,7 @@ namespace OOP_ADMIN
         private readonly Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;
 
-        public StateMachine(WorkingWhithDB db )
+        public StateMachine(WorkWhithDB db )
         {
             
             DataInitialization dataInitialization = new DataInitialization(this);
@@ -52,7 +52,7 @@ namespace OOP_ADMIN
             else
             {
                 
-                /*throw new Exception("Not available type");*/
+                throw new Exception("Not available type");
             }
 
             _currentState.OnEnter();

@@ -13,7 +13,7 @@ namespace OOP_ADMIN
         {
 
             AppDB appDB = new AppDB();
-            WorkingWhithDB db = new WorkingWhithDB(appDB);
+            WorkWhithDB db = new WorkWhithDB(appDB);
             StateMachine stateMachine = new StateMachine(db);
 
             stateMachine.SetState<DataInitialization>();
