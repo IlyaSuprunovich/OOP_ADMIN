@@ -10,16 +10,16 @@ namespace OOP_ADMIN
     /// <summary>
     /// Checks the entered data and determines the type of user.
     /// </summary>
-    internal class DataChecking : IState, IData<DataForStateDataChecking>
+    internal class StateDataChecking : IState, IData<DataForStateDataChecking>
     {
 
         private StateMachine _stateMachine;
         private DataForStateDataChecking _data;
         private DataForStateWorkingWhithDefaultUser _dataDefaultUser;
         private DataForStateWorkingWhithAdmin _dataAdmin;
-        private WorkWhithDB _db;
+        private WorkerWhithDB _db;
         
-        public DataChecking(StateMachine stateMachine, WorkWhithDB db)
+        public StateDataChecking(StateMachine stateMachine, WorkerWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;
@@ -41,20 +41,20 @@ namespace OOP_ADMIN
                 {
                     _dataDefaultUser.DefautUser = defautUser;
                    
-                    _stateMachine.SetState<WorkingWhithDefaultUser, DataForStateWorkingWhithDefaultUser>(_dataDefaultUser);
+                    _stateMachine.SetState<StateWorkingWhithDefaultUser, DataForStateWorkingWhithDefaultUser>(_dataDefaultUser);
                 }
 
                 else if (_db.FindUser(_data.Id) is Admin admin)
                 {
                     _dataAdmin.Admin = admin;
-                    _stateMachine.SetState<WorkingWithAdmin, DataForStateWorkingWhithAdmin>(_dataAdmin);
+                    _stateMachine.SetState<StateWorkingWithAdmin, DataForStateWorkingWhithAdmin>(_dataAdmin);
                 }
 
             }
             else
             {
                 Console.WriteLine("Неверный логин или пароль");
-                _stateMachine.SetState<DataInitialization>();
+                _stateMachine.SetState<StateDataInitialization>();
             }
         }
 

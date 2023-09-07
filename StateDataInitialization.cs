@@ -10,13 +10,13 @@ namespace OOP_ADMIN
     /// <summary>
     /// Data entry from the user.
     /// </summary>
-    internal class DataInitialization : IState, IData<DataForStateDataInitialization>
+    internal class StateDataInitialization : IState, IData<DataForStateDataInitialization>
     {
 
         private readonly StateMachine _stateMachine;
         private DataForStateDataChecking _data;
 
-        public DataInitialization(StateMachine stateMachine)
+        public StateDataInitialization(StateMachine stateMachine)
         {
             this._stateMachine = stateMachine;
             _data = new DataForStateDataChecking();
@@ -33,7 +33,7 @@ namespace OOP_ADMIN
             string password = Convert.ToString(Console.ReadLine());
             _data.Login = login;
             _data.Password = password; 
-            _stateMachine.SetState<DataChecking, DataForStateDataChecking>((_data));
+            _stateMachine.SetState<StateDataChecking, DataForStateDataChecking>((_data));
         }
 
         public void OnExit()

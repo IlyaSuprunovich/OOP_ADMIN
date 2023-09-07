@@ -46,12 +46,12 @@
     <Compile Include="Admin.cs" />
     <Compile Include="App.cs" />
     <Compile Include="AppDB.cs" />
-    <Compile Include="DataChecking.cs" />
+    <Compile Include="StateDataChecking.cs" />
     <Compile Include="DataForStateDataInitialization.cs" />
     <Compile Include="DataForStateDataChecking.cs" />
     <Compile Include="DataForStateWorkingWhithDefaultUser.cs" />
     <Compile Include="DataForStateWorkingWhithAdmin.cs" />
-    <Compile Include="DataInitialization.cs" />
+    <Compile Include="StateDataInitialization.cs" />
     <Compile Include="DefautUser.cs" />
     <Compile Include="IAdmin.cs" />
     <Compile Include="IData.cs" />
@@ -63,9 +63,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StateMachine.cs" />
     <Compile Include="User.cs" />
-    <Compile Include="WorkingWhithDB.cs" />
-    <Compile Include="WorkingWhithDefaultUser.cs" />
-    <Compile Include="WorkingWithAdmin.cs" />
+    <Compile Include="WorkerWhithDB.cs" />
+    <Compile Include="StateWorkingWhithDefaultUser.cs" />
+    <Compile Include="StateWorkingWithAdmin.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".editorconfig" />

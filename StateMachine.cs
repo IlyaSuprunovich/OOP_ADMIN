@@ -14,13 +14,13 @@ namespace OOP_ADMIN
         private readonly Dictionary<Type,IState> _states = new Dictionary<Type, IState>(5);
         private IState _currentState;
 
-        public StateMachine(WorkWhithDB db )
+        public StateMachine(WorkerWhithDB db )
         {
             
-            DataInitialization dataInitialization = new DataInitialization(this);
-            DataChecking dataChecking = new DataChecking(this, db);
-            WorkingWhithDefaultUser workingWhithDefaultUser = new WorkingWhithDefaultUser(this, db);
-            WorkingWithAdmin workingWithAdmin = new WorkingWithAdmin(this, db);
+            StateDataInitialization dataInitialization = new StateDataInitialization(this);
+            StateDataChecking dataChecking = new StateDataChecking(this, db);
+            StateWorkingWhithDefaultUser workingWhithDefaultUser = new StateWorkingWhithDefaultUser(this, db);
+            StateWorkingWithAdmin workingWithAdmin = new StateWorkingWithAdmin(this, db);
             _states.Add(dataInitialization.GetType(), dataInitialization);
             _states.Add(dataChecking.GetType(), dataChecking);
             _states.Add(workingWhithDefaultUser.GetType(), workingWhithDefaultUser);

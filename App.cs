@@ -16,10 +16,10 @@ namespace OOP_ADMIN
         {
 
             AppDB appDB = new AppDB();
-            WorkWhithDB db = new WorkWhithDB(appDB);
+            WorkerWhithDB db = new WorkerWhithDB(appDB);
             StateMachine stateMachine = new StateMachine(db);
 
-            stateMachine.SetState<DataInitialization>();
+            stateMachine.SetState<StateDataInitialization>();
 
             while (true)   
                 stateMachine.Handle();

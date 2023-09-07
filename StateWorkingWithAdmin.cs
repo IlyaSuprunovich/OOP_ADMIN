@@ -5,15 +5,15 @@ namespace OOP_ADMIN
     /// <summary>
     /// Statuses for working with the admin.
     /// </summary>
-    internal class WorkingWithAdmin : IState, IData<DataForStateWorkingWhithAdmin>
+    internal class StateWorkingWithAdmin : IState, IData<DataForStateWorkingWhithAdmin>
     {
 
         private readonly StateMachine _stateMachine;
-        private  WorkWhithDB _db;
+        private  WorkerWhithDB _db;
         private Admin _admin;
         
 
-        public WorkingWithAdmin(StateMachine stateMachine, WorkWhithDB db)
+        public StateWorkingWithAdmin(StateMachine stateMachine, WorkerWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;
@@ -57,7 +57,7 @@ namespace OOP_ADMIN
                 }
                 Console.WriteLine(" ");
             } while (choice != 4);
-            _stateMachine.SetState<DataInitialization>();
+            _stateMachine.SetState<StateDataInitialization>();
         }
 
         public void OnExit()

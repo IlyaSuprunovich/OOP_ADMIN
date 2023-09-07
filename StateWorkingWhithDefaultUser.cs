@@ -10,14 +10,14 @@ namespace OOP_ADMIN
     /// <summary>
     /// States for working with a default user.
     /// </summary>
-    internal class WorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
+    internal class StateWorkingWhithDefaultUser : IState, IData<DataForStateWorkingWhithDefaultUser>
     {
         private readonly StateMachine _stateMachine;
-        private WorkWhithDB _db;
+        private WorkerWhithDB _db;
         private DefautUser _defautUser;
         private DataForStateWorkingWhithDefaultUser _data;
 
-        public  WorkingWhithDefaultUser(StateMachine stateMachine, WorkWhithDB db)
+        public  StateWorkingWhithDefaultUser(StateMachine stateMachine, WorkerWhithDB db)
         {
             this._stateMachine = stateMachine;
             this._db = db;
@@ -65,7 +65,7 @@ namespace OOP_ADMIN
                 }
                 Console.WriteLine(" ");
             } while (choice != 4);
-           _stateMachine.SetState<DataInitialization>( );
+           _stateMachine.SetState<StateDataInitialization>( );
         }
 
         public void OnExit()

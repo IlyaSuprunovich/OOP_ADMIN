@@ -11,11 +11,11 @@ namespace OOP_ADMIN
     /// <summary>
     /// Allows you to check if there is a user in the database, searches for a user in the database, looks at friends of a certain user.
     /// </summary>
-    public class WorkWhithDB : AppDB, IPremitionService 
+    public class WorkerWhithDB : AppDB, IPremitionService 
     {
         private readonly AppDB _db;
 
-        public WorkWhithDB(AppDB db)
+        public WorkerWhithDB(AppDB db)
         {
             this._db = db;
         }
